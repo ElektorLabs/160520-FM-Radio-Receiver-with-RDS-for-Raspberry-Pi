@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+var host = window.location.hostname;
+var exampleSocket = new WebSocket("ws://"+host+":8080");
+exampleSocket.onopen = function (event) {
+  console.log("WS open"); 
+};
+
+exampleSocket.onmessage = function (event) {
+ var obj = JSON.parse(event.data);
+   for (var key in obj) {
+   	console.log(' name=' + key + ' value=' + obj[key]);
+   	if(key=="RDS_TEXT"){
+    		document.getElementById("Text").innerHTML = obj[key];
+   	}
+
+  	if(key=="RDS_STATION"){
+   		document.getElementById("Station").innerHTML = obj[key];
+  	}
+
+  	if(key=="FREQUENCY"){
+   		document.getElementById("Frequency").innerHTML = ((obj[key])/1000000);
+  	}
+
+ 	if(key=="RSSI"){
+   		document.getElementById("RSSI").innerHTML = obj[key];
+  	}
+
+ 	if(key=="VOLUME"){
+   		document.getElementById("Volume").innerHTML = obj[key];
+  	}
+   }
+}
+
+function Mute(){
+var obj = { "COMMAND":"MUTE_TOGGLE" };
+	exampleSocket.send( JSON.stringify(obj) );
+}
+
+function IncVol(){
+var obj = { "COMMAND":"VOLUME_UP" };
+exampleSocket.send( JSON.stringify(obj) );
+}
+
+function DecVol(){
+var obj = { "COMMAND":"VOLUME_DOWN" };
+exampleSocket.send( JSON.stringify(obj) );
+}
+
+</script>
+</head>
+
+<body>
+
+<h2>piRadio API Demo</h2>
+
+<a>Station: </a><a id="Station"></a><br>
+<a>Text: </a><a id="Text"> </a><br>
+<a>Frequency: </a><a id="Frequency"> </a><a>MHz</a><br>
+<a>RSSI: </a><a id="RSSI"> </a><br>
+<a>Volume: </a><a id="Volume"> </a><br>
+
+<button type="button" onclick="Mute()">Mute/Unmute</button>
+<button type="button" onclick="IncVol()">Increase Volue</button>
+<button type="button" onclick="DecVol()">Decrease Volume</button>
+
+</body>
+</html> 
+ 

@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/bookmark-new-2.png</file>
+        <file>icons/media-seek-backward-4.png</file>
+        <file>icons/media-seek-forward-4.png</file>
+        <file>icons/system-log-out-6.png</file>
+        <file>icons/network-wireless.png</file>
+        <file>icons/Elektor-Logo.png</file>
+        <file>icons/volume-down.png</file>
+        <file>icons/volume-up.png</file>
+        <file>icons/volume.png</file>
+        <file>icons/volume-mute.png</file>
+        <file>icons/user-desktop-2.png</file>
+    </qresource>
+</RCC>
